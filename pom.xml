@@ -4,11 +4,34 @@
 
 	<groupId>io.csra.wily</groupId>
 	<artifactId>hipaa-audit</artifactId>
-	<version>2.1.0</version>
+	<version>2.1.1</version>
 	<packaging>jar</packaging>
 
-	<name>hipaa-audit</name>
-	<url>http://maven.apache.org</url>
+	<name>wily-hipaa-audit</name>
+	<description>HIPAA Auditing Capability for the Wily Framework.</description>
+	<url>https://github.com/gditfc/wily-hipaa-audit</url>
+
+	<licenses>
+		<license>
+		  <name>The Apache Software License, Version 2.0</name>
+		  <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+		  <name>Nick DiMola</name>
+		  <email>nick.dimola@csra.com</email>
+		  <organization>CSRA</organization>
+		  <organizationUrl>https://www.csra.com</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:https://github.com/gditfc/wily-hipaa-audit.git</connection>
+		<developerConnection>scm:git:ssh://github.com:gditfc/wily-hipaa-audit.git</developerConnection>
+		<url>https://github.com/gditfc/wily-hipaa-audit/tree/master</url>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,14 +42,14 @@
 	<parent>
 		<groupId>io.csra.wily</groupId>
 		<artifactId>dependencies</artifactId>
-		<version>2.1.0</version>
+		<version>2.1.1</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>io.csra.wily</groupId>
 			<artifactId>security</artifactId>
-			<version>2.1.0</version>
+			<version>2.1.1</version>
 		</dependency>
 	
 		<dependency>
@@ -75,7 +98,7 @@
 					<execution>
 						<id>attach-sources</id>
 						<goals>
-							<goal>jar</goal>
+							<goal>jar-no-fork</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -92,6 +115,43 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>false</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>	
+	
 </project>

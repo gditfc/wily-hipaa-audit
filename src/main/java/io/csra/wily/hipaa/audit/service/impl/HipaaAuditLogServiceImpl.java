@@ -74,7 +74,13 @@ public class HipaaAuditLogServiceImpl implements HipaaAuditLogService {
 		dto.setClientId(extractClientId(o));
 		dto.setFunction(function);
 		dto.setProviders(user.getProviderIds());
-		dto.setRole(StringUtils.isNotBlank(user.getRole()) ? user.getRole() : "ROLE_USER");
+		
+		if (user.getRoles() != null && !user.getRoles().isEmpty()) {
+			dto.setRole(user.getRoles().get(0));
+		} else {
+			dto.setRole("ROLE_USER");
+		}
+		
 		dto.setTimestamp(new Date());
 		dto.setType(eventType);
 		dto.setUserName(user.getUserId());
