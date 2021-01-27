@@ -22,16 +22,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class HipaaAuditAspect {
 
-	@Autowired
-	private HipaaAuditLogService hipaaAuditLogService;
+	private final HipaaAuditLogService hipaaAuditLogService;
+
+	public HipaaAuditAspect(HipaaAuditLogService hipaaAuditLogService) {
+		this.hipaaAuditLogService = hipaaAuditLogService;
+	}
 
 	/**
 	 * This method will be invoked automagically by Spring whenever the @HipaaAudit annotation is applied to a RESTful
 	 * endpoint.
 	 * 
-	 * @param pjp
-	 * @param hipaaAudit
-	 * @return
+	 * @param pjp JoinPoint
+	 * @param hipaaAudit Audit Annotation
+	 * @return The proceeding object to continue aspect execution
 	 * @throws Throwable
 	 */
 	@Around(value = "@annotation(hipaaAudit)", argNames = "hipaaAudit")

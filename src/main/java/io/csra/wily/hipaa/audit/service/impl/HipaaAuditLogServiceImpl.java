@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 import io.csra.wily.hipaa.audit.model.HipaaEventDTO;
@@ -17,7 +16,6 @@ import io.csra.wily.security.model.UserDTO;
 import io.csra.wily.security.service.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -31,11 +29,14 @@ public class HipaaAuditLogServiceImpl implements HipaaAuditLogService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(HipaaAuditLogServiceImpl.class);
 	private static final Logger AUDIT_LOGGER = LoggerFactory.getLogger(AUDIT_LOGGER_NAME);
 
-	@Autowired
-	private ObjectMapper objectMapper;
+	private final ObjectMapper objectMapper;
+	private final SecurityService securityService;
 
-	@Autowired
-	private SecurityService securityService;
+	public HipaaAuditLogServiceImpl(ObjectMapper objectMapper, SecurityService securityService) {
+		this.objectMapper = objectMapper;
+		this.securityService = securityService;
+	}
+
 
 	public void generateLogs(Object o, String eventType, String app, String function) {
 		try {
@@ -158,7 +159,8 @@ public class HipaaAuditLogServiceImpl implements HipaaAuditLogService {
 	private void writeLogs(List<HipaaEventDTO> events) {
 		for (HipaaEventDTO event : events) {
 			try {
-				AUDIT_LOGGER.info(objectMapper.writeValueAsString(event));
+				String eventLog = objectMapper.writeValueAsString(event);
+				AUDIT_LOGGER.info(eventLog);
 			} catch (JsonProcessingException e) {
 				LOGGER.error("Failure in converting JSON", e);
 			}
