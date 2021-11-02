@@ -2,9 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>io.csra.wily</groupId>
 	<artifactId>hipaa-audit</artifactId>
-	<version>2.4.2</version>
+	<version>2.5.6</version>
 	<packaging>jar</packaging>
 
 	<name>wily-hipaa-audit</name>
@@ -35,16 +34,16 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 
-		<wily-security.version>2.4.2</wily-security.version>
+		<wily-security.version>2.5.6</wily-security.version>
 	</properties>
 
 	<parent>
 		<groupId>io.csra.wily</groupId>
 		<artifactId>dependencies</artifactId>
-		<version>2.4.2</version>
+		<version>2.5.6</version>
 	</parent>
 
 	<dependencies>
@@ -120,7 +119,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.5</version>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>sign-artifacts</id>
@@ -134,7 +133,7 @@
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.7</version>
+				<version>1.6.8</version>
 				<extensions>true</extensions>
 				<configuration>
 					<serverId>ossrh</serverId>
