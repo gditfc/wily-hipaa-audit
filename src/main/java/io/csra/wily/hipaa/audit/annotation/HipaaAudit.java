@@ -15,13 +15,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface HipaaAudit {
 
-	String TRANSACTION = "Transaction";
-	String DEMOGRAPHICS = "Demographics";
-	String PAYMENT = "Payment";
+    String TRANSACTION = "Transaction";
+    String DEMOGRAPHICS = "Demographics";
+    String PAYMENT = "Payment";
 
-	String type();
+    String type();
 
-	String app();
+    String app();
 
-	String function() default "All";
+    String function() default "All";
 }
