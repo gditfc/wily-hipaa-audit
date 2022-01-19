@@ -33,7 +33,7 @@
     </scm>
 
     <properties>
-        <wily-security.version>${project.parent.version}</wily-security.version>
+        <wily-security.version>2.6.2</wily-security.version>
     </properties>
 
     <parent>
