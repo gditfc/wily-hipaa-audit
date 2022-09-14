@@ -33,7 +33,7 @@ public class HipaaAuditAspect {
      * @param pjp        JoinPoint
      * @param hipaaAudit Audit Annotation
      * @return The proceeding object to continue aspect execution
-     * @throws Throwable
+     * @throws Throwable - exception
      */
     @Around(value = "@annotation(hipaaAudit)", argNames = "hipaaAudit")
     public Object aroundAdvice(ProceedingJoinPoint pjp, HipaaAudit hipaaAudit) throws Throwable {
